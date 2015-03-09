@@ -48,11 +48,13 @@
       });
 
 	}
-//등록 end
+	
+	//list화면출력 start
 	$(document).ready(function(){
 		
 		jQuery.ajaxSettings.traditional = true;
-		//list start
+		
+		
 	    $.post("/myapp/selectGearList", function (data) {
 				
 	        $("table[name=table01] tbody tr").remove();
@@ -61,14 +63,14 @@
 	            addRow(obj);
 	        }, "json");
 	    });
-	    //list end
+	    //list화면출력 end
 	  
-	    
+	   //list 호출 start 
 	$("button[name=listRender]").click(function () {
 		
 		
 		jQuery.ajaxSettings.traditional = true;
-		//list start
+		
 	    $.post("/myapp/selectGearList", function (data) {
 				
 	        $("table[name=table01] tbody tr").remove();
@@ -78,13 +80,8 @@
 	        }, "json");
 	    });
     });
+	   /* list 호출 end */ 
 	    
-	    
-	    
-	    
-	    
-	    
-	
 	//삭제 start
 	$("button[name=del]").click(function () {
 		
@@ -144,7 +141,8 @@
 			  $("button[name=listRender]").trigger('click');
 	      });
 		  
-	   });			
+	   });
+	/* 수정 end */
 	
 });
     
@@ -295,11 +293,11 @@
 <!--<form class="form-horizontal" role="form" name="listArea">-->
 <div name ="listArea" class="well">
 
-    <p><button class="btn btn-default btn-primary btn-info" name="listRender"><i class="glyphicon glyphicon-search"></i>조회</button>
-        <button class="btn btn-default btn-primary btn-danger" name="del"><i class="glyphicon glyphicon-floppy-remove"></i>삭제</button>
-        <button class="btn btn-default btn-primary btn btn-warning" name="redact"><i class="glyphicon glyphicon-floppy-save"></i>수정</button>
+    <p><!-- <button class="btn btn-default btn-primary btn-info" name="listRender"><i class="glyphicon glyphicon-search"></i>조회</button> -->
         <button class="btn btn-default btn-primary btn btn-success" name="save" data-target="#modal_pop" data-toggle="modal"><i class="glyphicon glyphicon-floppy-open"></i>등록요청</button>
-    </p>
+        <button class="btn btn-default btn-primary btn btn-warning" name="redact"><i class="glyphicon glyphicon-floppy-save"></i>수정</button>
+        <button class="btn btn-default btn-primary btn-danger" name="del"><i class="glyphicon glyphicon-floppy-remove"></i>삭제</button>
+   </p>
 
     <table name="table01" class="table table-bordered table-condensed table-hover table-striped ">
         <thead>
