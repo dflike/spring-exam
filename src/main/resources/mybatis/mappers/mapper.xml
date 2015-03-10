@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="home">
+
+    <select id="selectList" parameterType="Map" resultType="HashMap" >
+   		select id
+   		     , name
+   		     , snno
+   		     , rental
+   		     , day
+   		     , tel
+   		  from gear;
+    </select>
+    
+    <select id="selectDetailList" parameterType="Map" resultType="HashMap" >
+   		select id
+   		     , name
+   		     , snno
+   		     , rental
+   		     , day
+   		     , tel
+   		  from gear
+   		  where id = #{id};
+    </select>
+    
+    <insert id="insertGear" parameterType="Map">
+    	insert into gear(
+    	   id
+    	 , name
+    	 , snno
+    	 , rental
+    	 , day
+    	 , tel
+    	)values(
+    	  #{id}
+    	 ,#{name}
+    	 ,#{snno}
+    	 ,#{rental}
+    	 ,#{day}
+    	 ,#{tel}
+    	)
+    		
+    </insert>
+    
+    <delete id="deleteGear" parameterType="Map">
+    	delete from gear 
+    	 where id = #{id}
+    
+    </delete>
+    
+    <update id="updateGear" parameterType="Map">
+    	update gear
+    	   set name 	= #{name}
+    	      ,snno 	= #{snno}
+    	      ,rental 	= #{rental}
+    	      ,day   	= #{day}
+    	      ,tel		= #{tel}
+    	where id = #{id}      
+    	
+    </update>
+    
+    
+
+</mapper>

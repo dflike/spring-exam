@@ -11,7 +11,13 @@
 	<script src="http://code.jquery.com/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	<!-- <script src="http://path/to/your/copy/of/jquery.blockUI.js"></script> -->
-	
+<style type="text/css">
+
+#b{
+	visibility:hidden;
+}
+
+</style>	
 
 <script>
 
@@ -105,6 +111,8 @@
 	
 	$("button[name=submit]").click(saveRow);
 	
+	
+	
 	//수정요청 start
 	$("button[name=redact]").click(function(){
 		$('#modal_pop2').modal('show');
@@ -144,6 +152,35 @@
 	   });
 	/* 수정 end */
 	
+	//조회요청 start
+	$("button[name=ask]").click(function(){
+		$('#modal_pop3').modal('show');
+		
+		$("input[name=name3]").val($tr.find('td:eq(2)').text());
+		
+	});
+	//조회요청 end
+	
+	//조회 start
+ 	
+	$("button[name=saveAsk]").click(function() {
+		
+		var inputvalue = {
+	         	 
+	          	name: 	$("input[name=name3]").val()
+	        };
+
+		  $.post("/myapp/selectGearList", inputvalue, function (data) {
+			  if (data == 1) {
+	      		alert("검색되었습니다.");
+	      		
+			  }
+			  $("button[name=listRender]").trigger('click');
+	      });
+		  
+	   });
+	/* 조회 end */
+	
 });
     
 
@@ -154,6 +191,7 @@
 
 <body>
 
+<!-- 저장값 입력 폼 start-->
 <div class="modal fade" id="modal_pop">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -210,7 +248,8 @@
 
     <p>
     <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-    <button class="btn btn-default btn-primary btn-success" name="submit" > <i class="glyphicon glyphicon-floppy-saved"></i>등록</button>
+    <button class="btn btn-default btn-primary btn-success" name="submit" data-dismiss="modal"> 
+    	 <i class="glyphicon glyphicon-floppy-saved"></i>등록</button>
 
     </p>
 
@@ -220,7 +259,7 @@
         </div>
     </div>
 </div>
-
+<!-- 저장값 입력 form end-->
 
 <!-- 수정값 입력form -->
 <div class="modal fade" id="modal_pop2">
@@ -279,7 +318,8 @@
 
     <p>
     <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-    <button class="btn btn-default btn-primary btn-success" name="update" data-dismiss="modal"> <i class="glyphicon glyphicon-floppy-saved"></i>수정</button>
+    <button class="btn btn-default btn-primary btn-success" name="update" data-dismiss="modal"> 
+    	 <i class="glyphicon glyphicon-floppy-saved"></i>수정</button>
 
     </p>
 
@@ -290,13 +330,62 @@
     </div>
 </div>
 
+
+<!-- 조회 form start -->
+
+<div class="modal fade" id="modal_pop3">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- header-->
+            <div class="modal-header">
+                <div class="modal-body">
+<div class="form-horizontal" role="form" name="inputArea" style="background-color: beige">
+<!--<div name="inputArea" class="well">-->
+    <div class="form-group">
+        <label class="col-md-6 control-label">조회값 입력</label>
+    </div>
+
+    
+
+    <div class="form-group">
+        <label class="col-lg-3 control-label">이름</label>
+        <div class="col-lg-6">
+        <input type="text" class="form-control" name="name3" placeholder="name">
+        </div>
+    </div>
+
+    
+	<p>
+    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+    <button class="btn btn-default btn-primary btn-success" name="ask" data-dismiss="modal"> 
+    	 <i class="glyphicon glyphicon-floppy-saved"></i>조회</button>
+
+    </p>
+
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 조회 form end -->
+
 <!--<form class="form-horizontal" role="form" name="listArea">-->
 <div name ="listArea" class="well">
 
-    <p><!-- <button class="btn btn-default btn-primary btn-info" name="listRender"><i class="glyphicon glyphicon-search"></i>조회</button> -->
-        <button class="btn btn-default btn-primary btn btn-success" name="save" data-target="#modal_pop" data-toggle="modal"><i class="glyphicon glyphicon-floppy-open"></i>등록요청</button>
-        <button class="btn btn-default btn-primary btn btn-warning" name="redact"><i class="glyphicon glyphicon-floppy-save"></i>수정</button>
-        <button class="btn btn-default btn-primary btn-danger" name="del"><i class="glyphicon glyphicon-floppy-remove"></i>삭제</button>
+    <p>
+        <button class="btn btn-default btn-primary btn btn-success" name="save" data-target="#modal_pop" data-toggle="modal">
+        	 <i class="glyphicon glyphicon-floppy-open"></i>등록요청</button>
+        <button class="btn btn-default btn-primary btn btn-warning" name="redact">
+        	 <i class="glyphicon glyphicon-floppy-save"></i>수정요청</button>
+        <!-- <button class="btn btn-default btn-primary btn-info" name="ask" >
+    			 <i class="glyphicon glyphicon-search"></i>조회요청</button> -->	 
+        <button class="btn btn-default btn-primary btn-danger" name="del">
+        	 <i class="glyphicon glyphicon-floppy-remove"></i>삭제</button>
+        <button class="btn btn-default btn-primary btn-info" name="listRender" id="b">
+    			 <i class="glyphicon glyphicon-search"></i>list호출</button>		 	 
    </p>
 
     <table name="table01" class="table table-bordered table-condensed table-hover table-striped ">
