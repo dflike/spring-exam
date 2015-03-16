@@ -381,7 +381,7 @@
         <button class="btn btn-default btn-primary btn btn-warning" name="redact">
         	 <i class="glyphicon glyphicon-floppy-save"></i>수정요청</button>
         <!-- <button class="btn btn-default btn-primary btn-info" name="ask" >
-    			 <i class="glyphicon glyphicon-search"></i>조회요청</button> -->	 
+    			 <i class="glyphicon glyphicon-search"></i>검색요청</button> -->	 
         <button class="btn btn-default btn-primary btn-danger" name="del">
         	 <i class="glyphicon glyphicon-floppy-remove"></i>삭제</button>
         <button class="btn btn-default btn-primary btn-info" name="listRender" id="b">
